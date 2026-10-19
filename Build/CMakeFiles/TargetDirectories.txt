@@ -1,3 +1,6 @@
 /home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles/fi-pdf.dir
 /home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles/edit_cache.dir
 /home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles/rebuild_cache.dir
+/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/motor_pdf/CMakeFiles/motor_pdf.dir
+/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/motor_pdf/CMakeFiles/edit_cache.dir
+/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/motor_pdf/CMakeFiles/rebuild_cache.dir

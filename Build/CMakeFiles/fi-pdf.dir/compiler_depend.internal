@@ -48,4 +48,5 @@ fi-pdf
  /usr/lib/libc.so.6
  /usr/lib/libc_nonshared.a
  /home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles/fi-pdf.dir/main.c.o
+ /home/fran_linx/Proyecto_Integrador/fi-pdf/Build/motor_pdf/libmotor_pdf.so
 

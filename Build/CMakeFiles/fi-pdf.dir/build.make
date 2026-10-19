@@ -96,6 +96,7 @@ fi__pdf_EXTERNAL_OBJECTS =
 fi-pdf: CMakeFiles/fi-pdf.dir/main.c.o
 fi-pdf: CMakeFiles/fi-pdf.dir/build.make
 fi-pdf: CMakeFiles/fi-pdf.dir/compiler_depend.ts
+fi-pdf: motor_pdf/libmotor_pdf.so
 fi-pdf: CMakeFiles/fi-pdf.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable fi-pdf"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/fi-pdf.dir/link.txt --verbose=$(VERBOSE)

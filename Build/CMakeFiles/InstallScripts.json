@@ -1,7 +1,8 @@
 {
 	"InstallScripts" : 
 	[
-		"/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/cmake_install.cmake"
+		"/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/cmake_install.cmake",
+		"/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/motor_pdf/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

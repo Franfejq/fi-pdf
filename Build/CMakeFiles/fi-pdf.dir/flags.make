@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/fran_linx/Proyecto_Integrador/fi-pdf/Inc
+C_INCLUDES = -I/home/fran_linx/Proyecto_Integrador/fi-pdf/motor_pdf/Inc
 
 C_FLAGS = -std=c17 -Wall -Wextra -pedantic
 

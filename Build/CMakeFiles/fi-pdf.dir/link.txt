@@ -1,1 +1,1 @@
-/usr/bin/cc -Wl,--dependency-file=CMakeFiles/fi-pdf.dir/link.d "CMakeFiles/fi-pdf.dir/main.c.o" -o fi-pdf
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/fi-pdf.dir/link.d "CMakeFiles/fi-pdf.dir/main.c.o" -o fi-pdf  -Wl,-rpath,/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/motor_pdf motor_pdf/libmotor_pdf.so

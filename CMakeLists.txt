@@ -6,6 +6,7 @@ set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
+add_subdirectory(motor_pdf)
 #Banderas de Compilacion
 add_compile_options(-Wall -Wextra -pedantic)
 
@@ -16,4 +17,5 @@ set(SOURCES
 #Se crea el binario
 add_executable(fi-pdf ${SOURCES})
 
-target_include_directories(fi-pdf PRIVATE Inc)
+target_link_libraries(fi-pdf motor_pdf)
+

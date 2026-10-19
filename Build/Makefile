@@ -129,6 +129,19 @@ fi-pdf/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fi-pdf.dir/build.make CMakeFiles/fi-pdf.dir/build
 .PHONY : fi-pdf/fast
 
+#=============================================================================
+# Target rules for targets named motor_pdf
+
+# Build rule for target.
+motor_pdf: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 motor_pdf
+.PHONY : motor_pdf
+
+# fast build rule for target.
+motor_pdf/fast:
+	$(MAKE) $(MAKESILENT) -f motor_pdf/CMakeFiles/motor_pdf.dir/build.make motor_pdf/CMakeFiles/motor_pdf.dir/build
+.PHONY : motor_pdf/fast
+
 main.o: main.c.o
 .PHONY : main.o
 
@@ -162,6 +175,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... fi-pdf"
+	@echo "... motor_pdf"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

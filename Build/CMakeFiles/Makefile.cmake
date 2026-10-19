@@ -10,6 +10,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/4.3.1/CMakeCCompiler.cmake"
   "CMakeFiles/4.3.1/CMakeSystem.cmake"
   "/home/fran_linx/Proyecto_Integrador/fi-pdf/CMakeLists.txt"
+  "/home/fran_linx/Proyecto_Integrador/fi-pdf/motor_pdf/CMakeLists.txt"
   "/home/fran_linx/st/stm32cubeclt_1.22.0/CMake/share/cmake-4.3/Modules/CMakeCInformation.cmake"
   "/home/fran_linx/st/stm32cubeclt_1.22.0/CMake/share/cmake-4.3/Modules/CMakeCommonLanguageInclude.cmake"
   "/home/fran_linx/st/stm32cubeclt_1.22.0/CMake/share/cmake-4.3/Modules/CMakeGenericSystem.cmake"
@@ -43,9 +44,11 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "motor_pdf/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/fi-pdf.dir/DependInfo.cmake"
+  "motor_pdf/CMakeFiles/motor_pdf.dir/DependInfo.cmake"
   )

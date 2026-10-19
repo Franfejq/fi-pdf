@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -shared -Wl,--dependency-file=CMakeFiles/motor_pdf.dir/link.d -Wl,-soname,libmotor_pdf.so -o libmotor_pdf.so CMakeFiles/motor_pdf.dir/Src/fi_pdf.c.o

@@ -64,25 +64,47 @@ CMAKE_BINARY_DIR = /home/fran_linx/Proyecto_Integrador/fi-pdf/Build
 
 # The main recursive "all" target.
 all: CMakeFiles/fi-pdf.dir/all
+all: motor_pdf/all
 .PHONY : all
 
 # The main recursive "codegen" target.
 codegen: CMakeFiles/fi-pdf.dir/codegen
+codegen: motor_pdf/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: motor_pdf/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/fi-pdf.dir/clean
+clean: motor_pdf/clean
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory motor_pdf
+
+# Recursive "all" directory target.
+motor_pdf/all: motor_pdf/CMakeFiles/motor_pdf.dir/all
+.PHONY : motor_pdf/all
+
+# Recursive "codegen" directory target.
+motor_pdf/codegen: motor_pdf/CMakeFiles/motor_pdf.dir/codegen
+.PHONY : motor_pdf/codegen
+
+# Recursive "preinstall" directory target.
+motor_pdf/preinstall:
+.PHONY : motor_pdf/preinstall
+
+# Recursive "clean" directory target.
+motor_pdf/clean: motor_pdf/CMakeFiles/motor_pdf.dir/clean
+.PHONY : motor_pdf/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/fi-pdf.dir
 
 # All Build rule for target.
-CMakeFiles/fi-pdf.dir/all:
+CMakeFiles/fi-pdf.dir/all: motor_pdf/CMakeFiles/motor_pdf.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fi-pdf.dir/build.make CMakeFiles/fi-pdf.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fi-pdf.dir/build.make CMakeFiles/fi-pdf.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles --progress-num=1,2 "Built target fi-pdf"
@@ -90,7 +112,7 @@ CMakeFiles/fi-pdf.dir/all:
 
 # Build rule for subdir invocation for target.
 CMakeFiles/fi-pdf.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/fi-pdf.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles 0
 .PHONY : CMakeFiles/fi-pdf.dir/rule
@@ -109,6 +131,38 @@ CMakeFiles/fi-pdf.dir/codegen:
 CMakeFiles/fi-pdf.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fi-pdf.dir/build.make CMakeFiles/fi-pdf.dir/clean
 .PHONY : CMakeFiles/fi-pdf.dir/clean
+
+#=============================================================================
+# Target rules for target motor_pdf/CMakeFiles/motor_pdf.dir
+
+# All Build rule for target.
+motor_pdf/CMakeFiles/motor_pdf.dir/all:
+	$(MAKE) $(MAKESILENT) -f motor_pdf/CMakeFiles/motor_pdf.dir/build.make motor_pdf/CMakeFiles/motor_pdf.dir/depend
+	$(MAKE) $(MAKESILENT) -f motor_pdf/CMakeFiles/motor_pdf.dir/build.make motor_pdf/CMakeFiles/motor_pdf.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles --progress-num=3,4 "Built target motor_pdf"
+.PHONY : motor_pdf/CMakeFiles/motor_pdf.dir/all
+
+# Build rule for subdir invocation for target.
+motor_pdf/CMakeFiles/motor_pdf.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 motor_pdf/CMakeFiles/motor_pdf.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles 0
+.PHONY : motor_pdf/CMakeFiles/motor_pdf.dir/rule
+
+# Convenience name for target.
+motor_pdf: motor_pdf/CMakeFiles/motor_pdf.dir/rule
+.PHONY : motor_pdf
+
+# codegen rule for target.
+motor_pdf/CMakeFiles/motor_pdf.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f motor_pdf/CMakeFiles/motor_pdf.dir/build.make motor_pdf/CMakeFiles/motor_pdf.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles --progress-num=3,4 "Finished codegen for target motor_pdf"
+.PHONY : motor_pdf/CMakeFiles/motor_pdf.dir/codegen
+
+# clean rule for target.
+motor_pdf/CMakeFiles/motor_pdf.dir/clean:
+	$(MAKE) $(MAKESILENT) -f motor_pdf/CMakeFiles/motor_pdf.dir/build.make motor_pdf/CMakeFiles/motor_pdf.dir/clean
+.PHONY : motor_pdf/CMakeFiles/motor_pdf.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

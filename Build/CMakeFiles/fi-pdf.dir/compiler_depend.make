@@ -45,12 +45,15 @@ fi-pdf: /usr/lib/Scrt1.o \
   /usr/lib/ld-linux-x86-64.so.2 \
   /usr/lib/libc.so.6 \
   /usr/lib/libc_nonshared.a \
-  CMakeFiles/fi-pdf.dir/main.c.o
+  CMakeFiles/fi-pdf.dir/main.c.o \
+  motor_pdf/libmotor_pdf.so
 
 
 CMakeFiles/fi-pdf.dir/main.c.o:
 
 /usr/lib/libc_nonshared.a:
+
+motor_pdf/libmotor_pdf.so:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so:
 
