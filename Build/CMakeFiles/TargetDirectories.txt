@@ -1,0 +1,3 @@
+/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles/fi-pdf.dir
+/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles/edit_cache.dir
+/home/fran_linx/Proyecto_Integrador/fi-pdf/Build/CMakeFiles/rebuild_cache.dir
