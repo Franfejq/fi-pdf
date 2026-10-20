@@ -24,12 +24,14 @@ bool check_file(const char *path)
     return false;
   }
 
+  
   /*4.- Verificamos si el archivo 'path' NO TIENE permiso de escritura entonces*/
   if (access(path, W_OK) != 0) 
   {
     fprintf(stderr, "Error: El archivo %s no tiene permisos de escritura.\n", path);
     return false;
   }
+  
 
   /*5.-Verificamos si el archivo 'path' ESTA CORRUPTO entonces*/
   FILE *file = fopen(path, "rb");
