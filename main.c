@@ -25,7 +25,13 @@ int main(int argc, char *argv[])
     }
     else 
     {
-      check_file(argv[3]);
+      if(!(check_file(argv[3])))
+      {
+        return  EXIT_FAILURE;
+      }
+
+      
+      printf("[INFO]: El archivo %s es valido y esta listo para comprimir.\n", argv[3]);
     }
   }
 
