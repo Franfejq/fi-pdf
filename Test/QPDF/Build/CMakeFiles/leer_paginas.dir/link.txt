@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/leer_paginas.dir/link.d CMakeFiles/leer_paginas.dir/Test2.c.o -o leer_paginas  -lqpdf

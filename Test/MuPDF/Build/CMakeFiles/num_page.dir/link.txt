@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/num_page.dir/link.d CMakeFiles/num_page.dir/mupdf_test_1.c.o -o num_page  -lmupdf -lm

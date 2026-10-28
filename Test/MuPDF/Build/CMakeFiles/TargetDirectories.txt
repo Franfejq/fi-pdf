@@ -1,0 +1,3 @@
+/home/fran_linx/Proyecto_Integrador/Test/MuPDF/Build/CMakeFiles/num_page.dir
+/home/fran_linx/Proyecto_Integrador/Test/MuPDF/Build/CMakeFiles/edit_cache.dir
+/home/fran_linx/Proyecto_Integrador/Test/MuPDF/Build/CMakeFiles/rebuild_cache.dir
