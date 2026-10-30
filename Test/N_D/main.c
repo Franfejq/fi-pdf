@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
 {
 
   if(argc != 2)
-  {
+  { 
     fprintf(stderr, "Tienes que poner al menos dos argumentos!!\n");
     return EXIT_FAILURE;
   }
@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
   {
     new_file[i] = n_name[i];
   }
-  //Copiamos ahora los caracteres del sufijo al final del arra final
+  //Copiamos ahora los caracteres del sufijo al final del array final
   for(int i = 0; i < size_str(sufix); i++) 
   {
     new_file[i + base_len] = sufix[i];

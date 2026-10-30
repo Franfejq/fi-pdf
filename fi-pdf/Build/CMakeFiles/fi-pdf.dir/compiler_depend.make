@@ -32,6 +32,7 @@ CMakeFiles/fi-pdf.dir/main.c.o: /home/fran_linx/Proyecto_Integrador/fi-pdf/main.
   /usr/include/features.h \
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
+  /usr/include/limits.h \
   /usr/include/linux/errno.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
@@ -39,9 +40,11 @@ CMakeFiles/fi-pdf.dir/main.c.o: /home/fran_linx/Proyecto_Integrador/fi-pdf/main.
   /usr/include/string.h \
   /usr/include/sys/cdefs.h \
   /usr/include/unistd.h \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdarg.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdbool.h \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h
 
 fi-pdf: /usr/lib/Scrt1.o \
   /usr/lib/crti.o \
@@ -61,8 +64,6 @@ fi-pdf: /usr/lib/Scrt1.o \
   CMakeFiles/fi-pdf.dir/main.c.o \
   motor_pdf/libmotor_pdf.so
 
-
-CMakeFiles/fi-pdf.dir/main.c.o:
 
 /usr/lib/libc_nonshared.a:
 
@@ -86,6 +87,8 @@ motor_pdf/libmotor_pdf.so:
 
 /usr/include/sys/cdefs.h:
 
+/usr/include/string.h:
+
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so:
 
 /usr/include/bits/time64.h:
@@ -94,9 +97,13 @@ motor_pdf/libmotor_pdf.so:
 
 /usr/include/bits/stdio_lim.h:
 
-/usr/include/string.h:
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h:
 
 /usr/include/bits/posix_opt.h:
+
+CMakeFiles/fi-pdf.dir/main.c.o:
+
+/usr/include/limits.h:
 
 /usr/include/unistd.h:
 
@@ -137,6 +144,8 @@ motor_pdf/libmotor_pdf.so:
 /usr/include/stdio.h:
 
 /usr/include/bits/types/FILE.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h:
 
 /usr/include/bits/types/__fpos64_t.h:
 
