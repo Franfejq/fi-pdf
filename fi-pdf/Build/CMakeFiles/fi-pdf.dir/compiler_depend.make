@@ -30,6 +30,9 @@ CMakeFiles/fi-pdf.dir/main.c.o: /home/fran_linx/Proyecto_Integrador/fi-pdf/main.
   /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/ghostscript/gserrors.h \
+  /usr/include/ghostscript/iapi.h \
+  /usr/include/ghostscript/ierrors.h \
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
   /usr/include/limits.h \
@@ -46,40 +49,6 @@ CMakeFiles/fi-pdf.dir/main.c.o: /home/fran_linx/Proyecto_Integrador/fi-pdf/main.
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h
 
-fi-pdf: /usr/lib/Scrt1.o \
-  /usr/lib/crti.o \
-  /usr/lib/crtn.o \
-  /usr/lib/libc.so \
-  /usr/lib/libgcc_s.so.1 \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so \
-  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so \
-  /usr/lib/ld-linux-x86-64.so.2 \
-  /usr/lib/libc.so.6 \
-  /usr/lib/libc_nonshared.a \
-  CMakeFiles/fi-pdf.dir/main.c.o \
-  motor_pdf/libmotor_pdf.so
-
-
-/usr/lib/libc_nonshared.a:
-
-motor_pdf/libmotor_pdf.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o:
-
-/usr/lib/libc.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o:
-
-/usr/lib/crti.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h:
 
@@ -89,7 +58,9 @@ motor_pdf/libmotor_pdf.so:
 
 /usr/include/string.h:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so:
+/usr/include/stdio.h:
+
+/usr/include/stdc-predef.h:
 
 /usr/include/bits/time64.h:
 
@@ -101,15 +72,11 @@ motor_pdf/libmotor_pdf.so:
 
 /usr/include/bits/posix_opt.h:
 
-CMakeFiles/fi-pdf.dir/main.c.o:
-
 /usr/include/limits.h:
 
 /usr/include/unistd.h:
 
 /usr/include/features.h:
-
-/usr/lib/crtn.o:
 
 /usr/include/bits/floatn.h:
 
@@ -118,8 +85,6 @@ CMakeFiles/fi-pdf.dir/main.c.o:
 /home/fran_linx/Proyecto_Integrador/fi-pdf/motor_pdf/Inc/fi_pdf.h:
 
 /usr/include/bits/confname.h:
-
-/usr/lib/Scrt1.o:
 
 /usr/include/asm-generic/errno-base.h:
 
@@ -135,33 +100,29 @@ CMakeFiles/fi-pdf.dir/main.c.o:
 
 /usr/include/asm-generic/errno.h:
 
-/usr/include/asm/errno.h:
+/usr/include/ghostscript/gserrors.h:
 
 /home/fran_linx/Proyecto_Integrador/fi-pdf/main.c:
 
 /usr/include/bits/types.h:
 
-/usr/include/stdio.h:
-
 /usr/include/bits/types/FILE.h:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h:
 
+/usr/include/ghostscript/iapi.h:
+
 /usr/include/bits/types/__fpos64_t.h:
-
-/usr/lib/ld-linux-x86-64.so.2:
-
-/usr/include/stdc-predef.h:
 
 /usr/include/errno.h:
 
 /usr/include/bits/types/__fpos_t.h:
 
-/usr/lib/libc.so.6:
-
-/usr/lib/libgcc_s.so.1:
-
 /usr/include/bits/types/__mbstate_t.h:
+
+/usr/include/asm/errno.h:
+
+/usr/include/ghostscript/ierrors.h:
 
 /usr/include/bits/errno.h:
 
@@ -171,18 +132,14 @@ CMakeFiles/fi-pdf.dir/main.c.o:
 
 /usr/include/bits/wordsize.h:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so:
-
 /usr/include/bits/typesizes.h:
 
 /usr/include/linux/errno.h:
 
 /usr/include/gnu/stubs-64.h:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so:
+/usr/include/stdlib.h:
 
 /usr/include/bits/timesize.h:
-
-/usr/include/stdlib.h:
 
 /usr/include/gnu/stubs.h:

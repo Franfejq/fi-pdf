@@ -30,6 +30,9 @@ motor_pdf/CMakeFiles/motor_pdf.dir/Src/fi_pdf.c.o: /home/fran_linx/Proyecto_Inte
   /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/ghostscript/gserrors.h \
+  /usr/include/ghostscript/iapi.h \
+  /usr/include/ghostscript/ierrors.h \
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
   /usr/include/limits.h \
@@ -50,6 +53,7 @@ motor_pdf/libmotor_pdf.so: /usr/lib/crti.o \
   /usr/lib/crtn.o \
   /usr/lib/libc.so \
   /usr/lib/libgcc_s.so.1 \
+  /usr/lib/libgs.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so \
@@ -71,6 +75,8 @@ motor_pdf/libmotor_pdf.so: /usr/lib/crti.o \
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o:
 
+/usr/lib/libgs.so:
+
 /usr/lib/libc.so:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o:
@@ -84,6 +90,12 @@ motor_pdf/libmotor_pdf.so: /usr/lib/crti.o \
 /usr/include/sys/cdefs.h:
 
 /usr/include/string.h:
+
+/usr/include/stdio.h:
+
+/usr/lib/ld-linux-x86-64.so.2:
+
+/usr/include/stdc-predef.h:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so:
 
@@ -129,21 +141,17 @@ motor_pdf/libmotor_pdf.so: /usr/lib/crti.o \
 
 /usr/include/asm-generic/errno.h:
 
-/usr/include/asm/errno.h:
+/usr/include/ghostscript/gserrors.h:
 
 /usr/include/bits/types.h:
-
-/usr/include/stdio.h:
 
 /usr/include/bits/types/FILE.h:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h:
 
+/usr/include/ghostscript/iapi.h:
+
 /usr/include/bits/types/__fpos64_t.h:
-
-/usr/lib/ld-linux-x86-64.so.2:
-
-/usr/include/stdc-predef.h:
 
 motor_pdf/CMakeFiles/motor_pdf.dir/Src/fi_pdf.c.o:
 
@@ -156,6 +164,10 @@ motor_pdf/CMakeFiles/motor_pdf.dir/Src/fi_pdf.c.o:
 /usr/lib/libgcc_s.so.1:
 
 /usr/include/bits/types/__mbstate_t.h:
+
+/usr/include/asm/errno.h:
+
+/usr/include/ghostscript/ierrors.h:
 
 /usr/include/bits/errno.h:
 
@@ -175,8 +187,8 @@ motor_pdf/CMakeFiles/motor_pdf.dir/Src/fi_pdf.c.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic_asneeded.so:
 
+/usr/include/stdlib.h:
+
 /usr/include/bits/timesize.h:
 
 /usr/include/gnu/stubs.h:
-
-/usr/include/stdlib.h:

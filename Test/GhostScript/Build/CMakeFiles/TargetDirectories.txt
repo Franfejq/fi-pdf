@@ -1,0 +1,3 @@
+/home/fran_linx/Proyecto_Integrador/Test/GhostScript/Build/CMakeFiles/gs_test_nativo.dir
+/home/fran_linx/Proyecto_Integrador/Test/GhostScript/Build/CMakeFiles/edit_cache.dir
+/home/fran_linx/Proyecto_Integrador/Test/GhostScript/Build/CMakeFiles/rebuild_cache.dir

@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = -I/home/fran_linx/Proyecto_Integrador/fi-pdf/motor_pdf/Inc
 
-C_FLAGS = -std=c17 -Wall -Wextra -pedantic
+C_FLAGS = -std=gnu17 -Wall -Wextra -pedantic
 

@@ -12,10 +12,12 @@ add_compile_options(-Wall -Wextra -pedantic)
 
 set(SOURCES
   main.c)
+# Cambiar de OFF a ON activa -std=gnu17, revelando PATH_MAX nativamente.
+set(CMAKE_C_EXTENSIONS ON)
 
 
 #Se crea el binario
 add_executable(fi-pdf ${SOURCES})
 
-target_link_libraries(fi-pdf motor_pdf)
+target_link_libraries(fi-pdf motor_pdf gs)
 

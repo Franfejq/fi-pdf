@@ -25,4 +25,5 @@ motor_pdf/CMakeFiles/motor_pdf.dir/Src/fi_pdf.c.o: \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/limits.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/syslimits.h \
- /usr/include/limits.h
+ /usr/include/limits.h /usr/include/ghostscript/iapi.h \
+ /usr/include/ghostscript/ierrors.h /usr/include/ghostscript/gserrors.h

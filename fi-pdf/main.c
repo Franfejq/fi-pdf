@@ -27,9 +27,24 @@ int main(int argc, char *argv[])
       {
         return  EXIT_FAILURE;
       }
-
-      
       printf("[INFO]: El archivo %s es valido y esta listo para comprimir.\n", argv[3]);
+
+      char bandera = argv[2][1];
+      const char *file_name = argv[3];
+      char name_out[PATH_MAX];
+      dynamic_name(file_name, name_out);
+
+      printf("[INFO] Procesando compresión nivel '%c'...\n", bandera);
+
+      if (comprimir_pdf_nativo(file_name, name_out, bandera))
+      {
+        printf("[ÉXITO] Archivo comprimido correctamente sin depender de la terminal.\n");
+      }
+      else
+      {
+        fprintf(stderr, "[ERROR] El motor de compresión interno falló.\n");
+        return EXIT_FAILURE;
+      }
     }
   }
 

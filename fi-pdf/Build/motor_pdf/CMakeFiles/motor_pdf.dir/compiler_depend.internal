@@ -31,6 +31,9 @@ motor_pdf/CMakeFiles/motor_pdf.dir/Src/fi_pdf.c.o
  /usr/include/errno.h
  /usr/include/features-time64.h
  /usr/include/features.h
+ /usr/include/ghostscript/gserrors.h
+ /usr/include/ghostscript/iapi.h
+ /usr/include/ghostscript/ierrors.h
  /usr/include/gnu/stubs-64.h
  /usr/include/gnu/stubs.h
  /usr/include/limits.h
@@ -52,6 +55,7 @@ motor_pdf/libmotor_pdf.so
  /usr/lib/crtn.o
  /usr/lib/libc.so
  /usr/lib/libgcc_s.so.1
+ /usr/lib/libgs.so
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtendS.o
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so

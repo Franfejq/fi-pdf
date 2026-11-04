@@ -2,6 +2,7 @@ libmotor_pdf.so: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/crti.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o \
   CMakeFiles/motor_pdf.dir/Src/fi_pdf.c.o \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libgs.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s_asneeded.so \
@@ -38,6 +39,8 @@ libmotor_pdf.so: \
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o:
 
 CMakeFiles/motor_pdf.dir/Src/fi_pdf.c.o:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/../../../../lib/libgs.so:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a:
 
