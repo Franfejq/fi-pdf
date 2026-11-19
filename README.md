@@ -56,3 +56,14 @@ sudo apt update && sudo apt install build-essential cmake libgs-dev
 ```bash
 sudo dnf install gcc cmake ghostscript-devel
 ```
+
+## Compilación(Build)
+Tienes que clonar el repositorio y construye el binario fuera de arbol de fuentes(`out-of-source build`):
+
+```bash
+git clone https://github.com/Franfejq/fi-pdf.git
+cd fi-pdf
+mkdir Build && cd Build
+cmake ..
+cmake --build .
+```
