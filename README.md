@@ -29,3 +29,30 @@ fi-pdf/
     │   └── fi_pdf.h        # Cabeceras públicas, macros POSIX y prototipos
     └── Src/
         └── fi_pdf.c        # Validación, generación de nombres e interfaz libgs
+
+
+```
+## Requisitos y Dependencias 
+Para compilar y probar el proeyecto necesitas:
+* **Compilador de C:** GCC O Clang con soporte para **C17**.
+* **Sistema de construcción:** CMake **3.20** o superior.
+* **Biblioteca Ghostscript:** Esto nos descargara la biblioteca compartida (`libgs.so`) y los headers (`iapi.h` , `ierrors.h`).
+
+### Instalación de dependencias.
+#### Arch / Arch - Based:
+
+```bash
+sudo pacman -S base-devel cmake ghostscript
+```
+
+#### Debian / Debian - Based:
+
+```bash
+sudo apt update && sudo apt install build-essential cmake libgs-dev
+```
+
+#### Fedora / RHEL:
+
+```bash
+sudo dnf install gcc cmake ghostscript-devel
+```
