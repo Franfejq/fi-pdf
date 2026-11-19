@@ -67,3 +67,11 @@ mkdir Build && cd Build
 cmake ..
 cmake --build .
 ```
+Esto generara el ejecutable `fi-pdf` dentro de `Build/` y la biblioteca `Build/motor_pdf/libmotor_pdf.so`
+
+## Uso y Pruebas
+#### Sintaxis General
+
+```bash
+./fi-pdf <comando> <nivel> <ruta/al/archivo.pdf>
+```
