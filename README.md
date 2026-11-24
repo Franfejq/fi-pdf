@@ -136,3 +136,10 @@ Al abrir un issue en GitHub, por favor incluye:
 - [ ] Compresión estructural sin pérdida (-l) mediante QPDF.
 - [ ] Módulo de fusión de documentos (merge) integrando la API de C++ de QPDF mediante un puente extern "C".
 - [ ] Empaquetado e instalación global en /usr/local/bin vía cmake --install.
+
+## Autores
+Proyecto desarrolado en la **Facultad de Ingeniería, UNAM**:
+- Francisco Emiliano Juárez Quintero — Arquitectura de software, desarrollo en C17 e integración nativa de motores.
+- Isaac Josué Hernández Reyes — Diseño algorítmico y estructura lógica.
+- Mario Alberto González Navarro — Análisis matemático y modelado de compresión.
+- Ángel Antonio Tinoco Puebla — Aseguramiento de calidad (QA) y pruebas de escritorio.
