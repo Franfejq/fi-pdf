@@ -120,3 +120,19 @@ Ejecutar el binario bajo **valgrind** para verificar que **gsapi_delete_instance
 ```
 * Banderas no soportadas: 
 Probar qué ocurre al pasar argumentos incompletos o banderas distintas a **-m / -h** (actualmente cualquier bandera distinta a -m cae por defecto en el perfil /screen).
+
+** ¿Como reportar un issue?
+Al abrir un issue en GitHub, por favor incluye:
+1. Distribución de Linux y versión del compilador (gcc --version).
+2. Comando exacto ejecutado.
+3. Salida completa de la terminal (mensajes [INFO] / [ERROR]).
+4. Características del PDF de prueba (peso original, si contiene imágenes escaneadas, solo texto, o si está protegido con contraseña).
+
+** Estado del proyecto (Roadmap)
+- [x] Módulo de validación de existencia, extensión y permisos (check_file).
+- [x] Generador seguro de nombres de salida sin asignación dinámica (dynamic_name).
+- [x] Compresión gráfica nativa mediante libgs (niveles -m y -h).
+- [ ] Protección contra sobrescritura accidental mediante validación access(..., F_OK).
+- [ ] Compresión estructural sin pérdida (-l) mediante QPDF.
+- [ ] Módulo de fusión de documentos (merge) integrando la API de C++ de QPDF mediante un puente extern "C".
+- [ ] Empaquetado e instalación global en /usr/local/bin vía cmake --install.
