@@ -75,3 +75,20 @@ Esto generara el ejecutable `fi-pdf` dentro de `Build/` y la biblioteca `Build/m
 ```bash
 ./fi-pdf <comando> <nivel> <ruta/al/archivo.pdf>
 ```
+## Comandos disponibles
+1. Compresión **Media** (-m): Reduce la resolución de imágenes a **150 DPI** (-dPDFSETTINGS=/ebook), 
+este es el mas equilibrado entre calidad y peso.
+
+```bash
+./fi-pdf compress -m archivo.pdf
+```
+
+2. Compresión **Alta/Extrema** (-h): Reduce la resolución de imagen a **72 DPI** (-dPDFSETTINGS=/screen),
+para máxima reduccion de tamaño.
+peso.
+
+```bash
+./fi-pdf compress -h archivo.pdf
+```
+
+El archivo resultante se guardará automáticamente en el mismo directorio que el original con el sufijo _compress.pdf (ej. archivo_compress.pdf).
