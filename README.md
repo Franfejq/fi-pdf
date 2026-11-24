@@ -92,3 +92,31 @@ peso.
 ```
 
 El archivo resultante se guardará automáticamente en el mismo directorio que el original con el sufijo _compress.pdf (ej. archivo_compress.pdf).
+
+## Guia para Testers (Busqueda de Issues)
+Si clonaste el repositorio para ayudar a probar y depurar el motor, intenta romper el programa probando los siguientes escenarios y reporta cualquier comportamiento inesperado:
+
+* Rutas con espacios o caracteres especiales: 
+```bash
+./fi-pdf compress -h "/ruta/con espacios/Práctica 8 Modularidad.pdf"
+
+```
+
+* Validacion de integridad (check_file): 
+- Pasar un archivo inexistente.
+- Pasar un archivo con extensión distinta 
+a **.pdf** o un binario renombrado (falso.pdf).
+- Pasar un PDF sin permisos de lectura (chmod 000 prueba.pdf).
+
+* Límites de longitud de ruta: 
+- Probar rutas anidadas cercanas al límite de **PATH_MAX** (4096 bytes) o nombres de archivo de 255 bytes (NAME_MAX).
+
+* Fugas de memoria (Memory Leaks): 
+Ejecutar el binario bajo **valgrind** para verificar que **gsapi_delete_instance()** libera todo el Heap asignado por Ghostscript:
+
+```bash
+ valgrind --leak-check=full ./fi-pdf compress -m prueba.pdf
+
+```
+* Banderas no soportadas: 
+Probar qué ocurre al pasar argumentos incompletos o banderas distintas a **-m / -h** (actualmente cualquier bandera distinta a -m cae por defecto en el perfil /screen).
