@@ -1,1 +1,0 @@
-/usr/bin/cc  -Wall -Wextra -pedantic -Wl,--dependency-file=CMakeFiles/gs_test_nativo.dir/link.d CMakeFiles/gs_test_nativo.dir/gs_test.c.o -o gs_test_nativo  -lgs

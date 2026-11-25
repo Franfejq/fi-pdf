@@ -1,3 +1,0 @@
-/home/fran_linx/Proyecto_Integrador/Test/Build/CMakeFiles/leer_paginas.dir
-/home/fran_linx/Proyecto_Integrador/Test/Build/CMakeFiles/edit_cache.dir
-/home/fran_linx/Proyecto_Integrador/Test/Build/CMakeFiles/rebuild_cache.dir
