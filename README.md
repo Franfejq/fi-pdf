@@ -11,8 +11,10 @@ Desarrollado como proyecto de ingeniería bajo una filosofía de bajo nivel: **c
 A diferencia de herramientas que invocan subprocesos externos en *bash*, `fi-pdf` controla directamente el ciclo de vida del motor de renderizado en memoria:
 
 * **Motor Desacoplado (`libmotor_pdf.so`):** La lógica de procesamiento de archivos y manipulación de PDF está encapsulada en una biblioteca compartida independiente de la interfaz CLI (`main.c`).
-* **Integración Nativa con Ghostscript (`libgs`):** Encapsulada en el módulo `fi_gs` (`fi_gs.h` / `fi_gs.c`), utiliza `<ghostscript/iapi.h>` para instanciar la máquina virtual de PostScript/PDF directamente en el espacio de memoria del proceso, ejecutando *downsampling* matricial real sobre imágenes incrustadas.
-* **Seguridad de Memoria Determinista y Límites POSIX:** Se evita la asignación dinámica (`malloc`/`free`) para el manejo de rutas y nombres de archivos. Toda la manipulación de cadenas opera mediante *buffers* estáticos acotados por `PATH_MAX` (4096 bytes; `PATH_MAX + 32` en `comprimir_pdf_nativo` para el argumento `-sOutputFile=`) pasados por referencia, validando retornos de `snprintf`, `access` y `gsapi_*`.
+* **Integración Nativa con QPDF (`libqpdf`) y Ghostscript (`libgs`):** Encapsulada en el módulo `fi_gs` (`fi_gs.h` / `fi_gs.c`), despacha según el nivel solicitado:
+  * **`libqpdf` (`<qpdf/qpdf-c.h>`, nivel `-l`):** Optimización estructural sin pérdida (*lossless*) mediante compresión de *streams*, agrupación en *object streams* (`qpdf_o_generate`) y linearización para vista web.
+  * **`libgs` (`<ghostscript/iapi.h>`, niveles `-m` y `-h`):** Instancia la máquina virtual de PostScript/PDF directamente en el espacio de memoria del proceso, ejecutando *downsampling* matricial real sobre imágenes incrustadas.
+* **Seguridad de Memoria Determinista y Límites POSIX:** Se evita la asignación dinámica (`malloc`/`free`) para el manejo de rutas y nombres de archivos. Toda la manipulación de cadenas opera mediante *buffers* estáticos acotados por `PATH_MAX` (4096 bytes; `PATH_MAX + 32` en `comprimir_pdf_ghostscript` para el argumento `-sOutputFile=`) pasados por referencia, validando retornos de `snprintf`, `access`, `gsapi_*` y el ciclo completo de `libqpdf` (`qpdf_init`/`qpdf_cleanup`, `QPDF_ERRORS` y `qpdf_has_error`).
 * **Estándar Estricto:** El motor `motor_pdf` se compila bajo `-std=c17` con extensiones desactivadas (`CMAKE_C_EXTENSIONS OFF`), advertencias estrictas (`-Wall -Wextra -pedantic`) y `_POSIX_C_SOURCE 200809L` en `fi_pdf.c` y `fi_gs.c` para habilitar de forma portátil `PATH_MAX`, `access` y `F_OK` (con *include guards* `FI_PDF_H` y `FI_GS_H`).
 
 ---
@@ -24,12 +26,12 @@ fi-pdf/
 ├── CMakeLists.txt          # Configuración principal del ejecutable (fi-pdf)
 ├── main.c                  # Punto de entrada, parseo de argumentos y flujo CLI
 └── motor_pdf/              # Núcleo lógico compilado como biblioteca compartida
-    ├── CMakeLists.txt      # Configuración de enlazado con libgs
+    ├── CMakeLists.txt      # Configuración de enlazado con libgs y libqpdf (pkg-config)
     ├── Inc/
-    │   ├── fi_gs.h         # Interfaz pública del módulo de compresión Ghostscript
+    │   ├── fi_gs.h         # Interfaz pública del módulo de compresión (QPDF / Ghostscript)
     │   └── fi_pdf.h        # Cabeceras públicas, includes POSIX y prototipos base
     └── Src/
-        ├── fi_gs.c         # Implementación del wrapper nativo con libgs
+        ├── fi_gs.c         # Implementación nativa con libqpdf (-l) y libgs (-m / -h)
         └── fi_pdf.c        # Validación de archivos, nombres únicos y ayuda CLI
 ```
 
@@ -41,24 +43,25 @@ fi-pdf/
 
 Para compilar y probar el proyecto necesitas:
 * **Compilador de C:** GCC o Clang con soporte para **C17**.
-* **Sistema de construcción:** CMake **3.20** o superior.
+* **Sistema de construcción:** CMake **3.20** o superior y **`pkg-config`**.
+* **Biblioteca QPDF:** Proporciona la biblioteca compartida (`libqpdf`) y la cabecera C (`qpdf/qpdf-c.h`).
 * **Biblioteca Ghostscript:** Proporciona la biblioteca compartida (`libgs.so`) y las cabeceras (`iapi.h`, `ierrors.h`).
 
 ### Instalación de dependencias
 
 #### Arch / Arch-based:
 ```bash
-sudo pacman -S base-devel cmake ghostscript
+sudo pacman -S base-devel cmake pkgconf ghostscript qpdf
 ```
 
 #### Debian / Debian-based:
 ```bash
-sudo apt update && sudo apt install build-essential cmake libgs-dev
+sudo apt update && sudo apt install build-essential cmake pkg-config libgs-dev libqpdf-dev
 ```
 
 #### Fedora / RHEL:
 ```bash
-sudo dnf install gcc cmake ghostscript-devel
+sudo dnf install gcc cmake pkgconf-pkg-config ghostscript-devel qpdf-devel
 ```
 
 ---
@@ -89,13 +92,19 @@ Esto generará el ejecutable `fi-pdf` dentro de `Build/` y la biblioteca `Build/
 
 ### Comandos disponibles
 
-1. Compresión **Media** (`-m`): Reduce la resolución de imágenes a **150 DPI** (`-dPDFSETTINGS=/ebook`), logrando un equilibrio entre calidad y peso.
+1. Compresión **Baja / Estructural** (`-l`): Optimiza el PDF mediante `libqpdf` (compresión de *streams*, agrupación en *object streams* y linearización web), sin recomprimir ni reducir la resolución de imágenes.
+
+```bash
+./fi-pdf compress -l archivo.pdf
+```
+
+2. Compresión **Media** (`-m`): Reduce la resolución de imágenes a **150 DPI** (`-dPDFSETTINGS=/ebook`) vía `libgs`, logrando un equilibrio entre calidad y peso.
 
 ```bash
 ./fi-pdf compress -m archivo.pdf
 ```
 
-2. Compresión **Alta/Extrema** (`-h`): Reduce la resolución de imágenes a **72 DPI** (`-dPDFSETTINGS=/screen`), para máxima reducción de tamaño.
+3. Compresión **Alta/Extrema** (`-h`): Reduce la resolución de imágenes a **72 DPI** (`-dPDFSETTINGS=/screen`) vía `libgs`, para máxima reducción de tamaño.
 
 ```bash
 ./fi-pdf compress -h archivo.pdf
@@ -132,13 +141,14 @@ Si clonaste el repositorio para ayudar a probar y depurar el motor, intenta romp
   * Probar rutas anidadas cercanas al límite de **PATH_MAX** (4096 bytes) o nombres de archivo de 255 bytes (`NAME_MAX`) para comprobar el rechazo controlado sin truncamientos.
 
 * **Fugas de memoria (Memory Leaks):**
-  Ejecutar el binario bajo **valgrind** para verificar que `gsapi_delete_instance()` libera todo el Heap asignado por Ghostscript:
+  Ejecutar el binario bajo **valgrind** para verificar que `qpdf_cleanup()` (nivel `-l`) y `gsapi_delete_instance()` (niveles `-m`/`-h`) liberan todo el Heap asignado:
   ```bash
+  valgrind --leak-check=full ./fi-pdf compress -l prueba.pdf
   valgrind --leak-check=full ./fi-pdf compress -m prueba.pdf
   ```
 
 * **Banderas no soportadas:**
-  Probar qué ocurre al pasar argumentos incompletos o banderas distintas a **`-m` / `-h`** (actualmente cualquier bandera distinta a `-m` cae por defecto en el perfil `/screen`).
+  Probar qué ocurre al pasar argumentos incompletos o banderas distintas a **`-l` / `-m` / `-h`** (el motor debe rechazar explícitamente niveles no reconocidos retornando `EXIT_FAILURE` sin ejecutar ningún motor).
 
 ---
 
@@ -158,7 +168,7 @@ Al abrir un issue en GitHub, por favor incluye:
 - [x] Generador seguro de nombres de salida sin asignación dinámica (`dynamic_name`), con normalización de sufijos previos (`normalizar_base_compresion`) y validación estricta de `PATH_MAX`.
 - [x] Protección contra sobrescritura accidental mediante validación `access(..., F_OK)` e incremento automático `_compress(n).pdf`.
 - [x] Compresión gráfica nativa mediante `libgs` (niveles `-m` y `-h`), con manejo seguro de rutas de hasta `PATH_MAX` en `-sOutputFile=`.
-- [ ] Compresión estructural sin pérdida (`-l`) mediante QPDF.
+- [x] Compresión estructural sin pérdida (`-l`) mediante `libqpdf` (compresión de *streams*, *object streams* y linearización web).
 - [ ] Módulo de fusión de documentos (`merge`) integrando la API de C++ de QPDF mediante un puente `extern "C"`.
 - [ ] Empaquetado e instalación global en `/usr/local/bin` vía `cmake --install`.
 
