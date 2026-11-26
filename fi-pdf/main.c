@@ -32,8 +32,14 @@ int main(int argc, char *argv[])
       char bandera = argv[2][1];
       const char *file_name = argv[3];
       char name_out[PATH_MAX];
-      dynamic_name(file_name, name_out);
 
+      /* Generamos una ruta de salida libre y abortamos si ocurre algún error */
+      if (!dynamic_name(file_name, name_out))
+      {
+        return EXIT_FAILURE;
+      }
+
+      printf("[INFO] Archivo de salida: %s\n", name_out);
       printf("[INFO] Procesando compresión nivel '%c'...\n", bandera);
 
       if (comprimir_pdf_nativo(file_name, name_out, bandera))
