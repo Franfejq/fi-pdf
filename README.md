@@ -10,7 +10,7 @@ Desarrollado como proyecto de ingeniería bajo una filosofía de bajo nivel: **c
 
 A diferencia de herramientas que invocan subprocesos externos en *bash*, `fi-pdf` controla directamente el ciclo de vida del motor de renderizado en memoria:
 
-* **Motor Desacoplado (`libmotor_pdf.so`):** La lógica de procesamiento de archivos y manipulación de PDF está encapsulada en una biblioteca compartida independiente de la interfaz CLI (`main.c`).
+* **Motor Desacoplado (`libmotor_pdf.a`):** La lógica de procesamiento de archivos y manipulación de PDF está encapsulada en el módulo estático `motor_pdf`, independiente de la interfaz CLI (`main.c`), y enlazada directamente en el binario final `fi-pdf` para evitar dependencias de rutas locales en tiempo de ejecución.
 * **Integración Nativa con QPDF (`libqpdf`) y Ghostscript (`libgs`):**
   * **Compresión (`fi_gs.h` / `fi_gs.c`):** Despacha según el nivel solicitado:
     * **`libqpdf` (`<qpdf/qpdf-c.h>`, nivel `-l`):** Optimización estructural sin pérdida (*lossless*) mediante compresión de *streams*, agrupación en *object streams* (`qpdf_o_generate`) y linearización para vista web.
@@ -82,7 +82,27 @@ cmake ..
 cmake --build .
 ```
 
-Esto generará el ejecutable `fi-pdf` dentro de `Build/` y la biblioteca `Build/motor_pdf/libmotor_pdf.so`.
+Esto generará el ejecutable `fi-pdf` dentro de `Build/` (con `motor_pdf` enlazado estáticamente).
+
+### Instalación y Empaquetado (`cmake --install` y `CPack`)
+
+Para compilar en modo **Release** e instalar el binario en el sistema:
+
+```bash
+cmake -S . -B Build -DCMAKE_BUILD_TYPE=Release
+cmake --build Build
+# Instalación global en /usr/local/bin:
+sudo cmake --install Build
+# O instalación local para el usuario actual (~/.local/bin):
+cmake --install Build --prefix ~/.local
+```
+
+Para generar paquetes distribuibles con **CPack** (`.tar.gz`, y automáticamente `.deb` o `.rpm` si el sistema cuenta con `dpkg-deb` o `rpmbuild`):
+
+```bash
+cd Build
+cpack
+```
 
 ---
 
@@ -178,7 +198,7 @@ Al abrir un issue en GitHub, por favor incluye:
 - [x] Compresión gráfica nativa mediante `libgs` (niveles `-m` y `-h`), con manejo seguro de rutas de hasta `PATH_MAX` en `-sOutputFile=`.
 - [x] Compresión estructural sin pérdida (`-l`) mediante `libqpdf` (compresión de *streams*, *object streams* y linearización web).
 - [x] Módulo de fusión de documentos (`merge`) implementado en C17 puro mediante la API nativa en C de `libqpdf` (`qpdf/qpdf-c.h`).
-- [ ] Empaquetado e instalación global en `/usr/local/bin` vía `cmake --install`.
+- [x] Empaquetado e instalación vía `cmake --install` y `CPack` (`.tar.gz` / `.deb` / `.rpm`).
 
 ---
 

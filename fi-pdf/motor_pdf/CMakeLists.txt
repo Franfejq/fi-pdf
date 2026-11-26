@@ -1,4 +1,4 @@
-add_library(motor_pdf SHARED
+add_library(motor_pdf STATIC
   Inc/fi_pdf.h
   Inc/fi_gs.h
   Inc/merge.h
