@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fi_pdf.h"
+#include "fi_gs.h"
 
 int main(int argc, char *argv[])
 {

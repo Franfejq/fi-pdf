@@ -11,9 +11,9 @@ Desarrollado como proyecto de ingeniería bajo una filosofía de bajo nivel: **c
 A diferencia de herramientas que invocan subprocesos externos en *bash*, `fi-pdf` controla directamente el ciclo de vida del motor de renderizado en memoria:
 
 * **Motor Desacoplado (`libmotor_pdf.so`):** La lógica de procesamiento de archivos y manipulación de PDF está encapsulada en una biblioteca compartida independiente de la interfaz CLI (`main.c`).
-* **Integración Nativa con Ghostscript (`libgs`):** Utiliza `<ghostscript/iapi.h>` para instanciar la máquina virtual de PostScript/PDF directamente en el espacio de memoria del proceso, ejecutando *downsampling* matricial real sobre imágenes incrustadas.
+* **Integración Nativa con Ghostscript (`libgs`):** Encapsulada en el módulo `fi_gs` (`fi_gs.h` / `fi_gs.c`), utiliza `<ghostscript/iapi.h>` para instanciar la máquina virtual de PostScript/PDF directamente en el espacio de memoria del proceso, ejecutando *downsampling* matricial real sobre imágenes incrustadas.
 * **Seguridad de Memoria Determinista y Límites POSIX:** Se evita la asignación dinámica (`malloc`/`free`) para el manejo de rutas y nombres de archivos. Toda la manipulación de cadenas opera mediante *buffers* estáticos acotados por `PATH_MAX` (4096 bytes; `PATH_MAX + 32` en `comprimir_pdf_nativo` para el argumento `-sOutputFile=`) pasados por referencia, validando retornos de `snprintf`, `access` y `gsapi_*`.
-* **Estándar Estricto:** El motor `motor_pdf` se compila bajo `-std=c17` con extensiones desactivadas (`CMAKE_C_EXTENSIONS OFF`), advertencias estrictas (`-Wall -Wextra -pedantic`) y `_POSIX_C_SOURCE 200809L` en `fi_pdf.c` para habilitar de forma portátil `PATH_MAX`, `access` y `F_OK` (con *include guard* `FI_PDF_H` en `fi_pdf.h`).
+* **Estándar Estricto:** El motor `motor_pdf` se compila bajo `-std=c17` con extensiones desactivadas (`CMAKE_C_EXTENSIONS OFF`), advertencias estrictas (`-Wall -Wextra -pedantic`) y `_POSIX_C_SOURCE 200809L` en `fi_pdf.c` y `fi_gs.c` para habilitar de forma portátil `PATH_MAX`, `access` y `F_OK` (con *include guards* `FI_PDF_H` y `FI_GS_H`).
 
 ---
 
@@ -26,9 +26,11 @@ fi-pdf/
 └── motor_pdf/              # Núcleo lógico compilado como biblioteca compartida
     ├── CMakeLists.txt      # Configuración de enlazado con libgs
     ├── Inc/
-    │   └── fi_pdf.h        # Cabeceras públicas, includes POSIX y prototipos
+    │   ├── fi_gs.h         # Interfaz pública del módulo de compresión Ghostscript
+    │   └── fi_pdf.h        # Cabeceras públicas, includes POSIX y prototipos base
     └── Src/
-        └── fi_pdf.c        # Validación, nombres únicos y wrapper nativo libgs
+        ├── fi_gs.c         # Implementación del wrapper nativo con libgs
+        └── fi_pdf.c        # Validación de archivos, nombres únicos y ayuda CLI
 ```
 
 > **Nota:** La documentación del proyecto se centraliza en este `README.md` raíz (se eliminó el antiguo `fi-pdf/README.md` vacío).
