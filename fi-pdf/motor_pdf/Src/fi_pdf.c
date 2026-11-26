@@ -6,7 +6,8 @@
 #include "fi_pdf.h"
 
 int size_str(const char *str);
-static size_t normalizar_base_compresion(const char *origen, size_t base_len);
+static size_t normalizar_base_sufijo(const char *origen, size_t base_len, const char *prefijo);
+static bool generar_nombre_unico(const char *origen, char *destino, const char *etiqueta);
 
 bool check_file(const char *path)
 {
@@ -64,13 +65,12 @@ bool check_file(const char *path)
 
 /**
  * Normaliza la longitud base antes de ".pdf" removiendo un sufijo previo
- * "_compress" o "_compress(<dígitos>)", siempre que permanezca al menos
+ * "<prefijo>" o "<prefijo>(<dígitos>)", siempre que permanezca al menos
  * un carácter del nombre de archivo antes de dicho sufijo.
  */
-static size_t normalizar_base_compresion(const char *origen, size_t base_len)
+static size_t normalizar_base_sufijo(const char *origen, size_t base_len, const char *prefijo)
 {
-  const char *prefijo = "_compress";
-  const size_t prefijo_len = 9;
+  const size_t prefijo_len = (size_t)size_str(prefijo);
   size_t corte = base_len;
 
   /* Si la base termina en ')', retrocedemos sobre los dígitos para detectar "(n)" */
@@ -88,7 +88,7 @@ static size_t normalizar_base_compresion(const char *origen, size_t base_len)
     }
   }
 
-  /* Recortamos "_compress" solo si queda al menos 1 carácter útil del nombre (y no es '/') */
+  /* Recortamos el prefijo solo si queda al menos 1 carácter útil del nombre (y no es '/') */
   if (corte > prefijo_len &&
       origen[corte - prefijo_len - 1] != '/' &&
       strncmp(origen + (corte - prefijo_len), prefijo, prefijo_len) == 0)
@@ -96,21 +96,18 @@ static size_t normalizar_base_compresion(const char *origen, size_t base_len)
     return corte - prefijo_len;
   }
 
-  /* Si no coincide con el patrón de compresión, se conserva la base original */
+  /* Si no coincide con el patrón previo, se conserva la base original */
   return base_len;
 }
 
 /**
- * Genera una ruta de salida única con sufijo "_compress.pdf" o
- * "_compress(n).pdf" evitando sobrescribir archivos existentes en disco.
- * @param origen  Ruta original del archivo PDF.
- * @param destino Buffer de salida con capacidad mínima de PATH_MAX bytes.
- * @return        true si se generó un nombre libre dentro de PATH_MAX, false en error.
+ * Genera una ruta de salida única con sufijo "<etiqueta>.pdf" o
+ * "<etiqueta>(n).pdf" evitando sobrescribir archivos existentes en disco.
  */
-bool dynamic_name(const char *origen, char *destino)
+static bool generar_nombre_unico(const char *origen, char *destino, const char *etiqueta)
 {
-  /* Validamos que ambos punteros recibidos sean válidos */
-  if (origen == NULL || destino == NULL)
+  /* Validamos que todos los punteros recibidos sean válidos */
+  if (origen == NULL || destino == NULL || etiqueta == NULL)
   {
     fprintf(stderr, "Error: Rutas inválidas al generar el nombre de salida.\n");
     return false;
@@ -124,28 +121,17 @@ bool dynamic_name(const char *origen, char *destino)
     return false;
   }
 
-  /* Obtenemos la raíz lógica del nombre removiendo ".pdf" y cualquier sufijo "_compress..." previo */
-  size_t base_len = normalizar_base_compresion(origen, origen_len - 4);
-  const char sufix[] = "_compress.pdf";
-  size_t sufix_len = (size_t)size_str(sufix);
-
-  /* Verificamos que la ruta candidata quepa en PATH_MAX incluyendo el terminador '\0' */
-  if (base_len + sufix_len >= PATH_MAX)
+  /* Obtenemos la raíz lógica del nombre removiendo ".pdf" y cualquier sufijo previo */
+  size_t base_len = normalizar_base_sufijo(origen, origen_len - 4, etiqueta);
+  int sufix_escritos = snprintf(destino, PATH_MAX, "%.*s%s.pdf",
+                                (int)base_len, origen, etiqueta);
+  if (sufix_escritos < 0 || sufix_escritos >= PATH_MAX)
   {
     fprintf(stderr, "Error: La ruta de salida excede el límite PATH_MAX (%d).\n", PATH_MAX);
     return false;
   }
 
-  /* 1.- Copiamos la base del nombre original (normalizada y sin .pdf) */
-  memcpy(destino, origen, base_len);
-
-  /* 2.- Pegamos el sufijo inicial "_compress.pdf" donde termina la base */
-  memcpy(destino + base_len, sufix, sufix_len);
-
-  /* 3.- Agregamos el carácter nulo al final */
-  destino[base_len + sufix_len] = '\0';
-
-  /* 4.- Verificamos colisión en disco con access(..., F_OK) e incrementamos (n) si ya existe */
+  /* Verificamos colisión en disco con access(..., F_OK) e incrementamos (n) si ya existe */
   int n = 1;
   while (1)
   {
@@ -170,9 +156,9 @@ bool dynamic_name(const char *origen, char *destino)
       return false;
     }
 
-    /* Reconstruimos el sufijo con "_compress(n).pdf" respetando el espacio restante en PATH_MAX */
+    /* Reconstruimos el sufijo con "<etiqueta>(n).pdf" respetando el espacio restante en PATH_MAX */
     int escritos = snprintf(destino + base_len, PATH_MAX - base_len,
-                            "_compress(%d).pdf", n);
+                            "%s(%d).pdf", etiqueta, n);
     if (escritos < 0 || (size_t)escritos >= PATH_MAX - base_len)
     {
       fprintf(stderr, "Error: La ruta de salida excede el límite PATH_MAX (%d).\n", PATH_MAX);
@@ -180,6 +166,23 @@ bool dynamic_name(const char *origen, char *destino)
     }
     n++;
   }
+}
+
+/**
+ * Genera una ruta de salida única con sufijo "_compress.pdf" o
+ * "_compress(n).pdf" evitando sobrescribir archivos existentes en disco.
+ * @param origen  Ruta original del archivo PDF.
+ * @param destino Buffer de salida con capacidad mínima de PATH_MAX bytes.
+ * @return        true si se generó un nombre libre dentro de PATH_MAX, false en error.
+ */
+bool dynamic_name(const char *origen, char *destino)
+{
+  return generar_nombre_unico(origen, destino, "_compress");
+}
+
+bool dynamic_merge_name(const char *origen, char *destino)
+{
+  return generar_nombre_unico(origen, destino, "_merge");
 }
 int size_str(const char *str)
 {

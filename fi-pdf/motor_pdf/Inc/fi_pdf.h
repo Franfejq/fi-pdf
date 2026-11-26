@@ -11,6 +11,16 @@
 
 bool check_file(const char *path);
 bool dynamic_name(const char *origen, char *destino);
+
+/**
+ * Genera una ruta de salida única con sufijo "_merge.pdf" o "_merge(n).pdf"
+ * a partir del primer documento de entrada, evitando sobrescribir archivos en disco.
+ *
+ * @param origen  Ruta del primer archivo PDF de entrada.
+ * @param destino Buffer de salida con capacidad mínima de PATH_MAX bytes.
+ * @return        true si se generó una ruta válida libre, false en error.
+ */
+bool dynamic_merge_name(const char *origen, char *destino);
 int size_str(const char *str);
 void print_help(void);
 

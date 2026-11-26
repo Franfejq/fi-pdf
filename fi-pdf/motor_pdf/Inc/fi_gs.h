@@ -2,6 +2,7 @@
 #define FI_GS_H
 
 #include <stdbool.h>
+#include <qpdf/qpdf-c.h>
 
 /**
  * Comprime un archivo PDF utilizando el motor nativo correspondiente al nivel:
@@ -15,5 +16,16 @@
  * @return            true si la compresión finalizó correctamente, false en error.
  */
 bool comprimir_pdf_nativo(const char *archivo_in, const char *archivo_out, char nivel);
+
+/**
+ * Verifica el código de retorno y el estado interno de error de libqpdf.
+ *
+ * @param pdf    Contexto qpdf_data a inspeccionar.
+ * @param estado Código de error devuelto por la operación de libqpdf.
+ * @param etapa  Nombre descriptivo de la etapa ejecutada.
+ * @return       true si no hubo errores, false si se registró algún fallo.
+ */
+bool verificar_estado_qpdf(qpdf_data pdf, QPDF_ERROR_CODE estado, const char *etapa);
+
 
 #endif // FI_GS_H

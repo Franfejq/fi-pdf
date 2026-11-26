@@ -15,8 +15,14 @@
  * Verifica el código de retorno y el estado interno de error de qpdf.
  * Reporta el mensaje descriptivo en stderr si ocurrió un error.
  */
-static bool verificar_estado_qpdf(qpdf_data pdf, QPDF_ERROR_CODE estado, const char *etapa)
+bool verificar_estado_qpdf(qpdf_data pdf, QPDF_ERROR_CODE estado, const char *etapa)
 {
+    if (pdf == NULL)
+    {
+        fprintf(stderr, "[ERROR] Contexto libqpdf nulo en (%s).\n", etapa);
+        return false;
+    }
+
     if ((estado & QPDF_ERRORS) == 0 && !qpdf_has_error(pdf))
     {
         return true;
